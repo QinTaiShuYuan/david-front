@@ -9,7 +9,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, {size: 'small', zIndex:3000})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
