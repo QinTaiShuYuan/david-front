@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        "/baidu_music_api": {
+          target: "https://www.runoob.com/try/ajax/json_demo.json",
+          changeOrigin: true,
+          pathRewrite: {
+              '^/baidu_music_api': '/'
+          }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
