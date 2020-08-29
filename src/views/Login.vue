@@ -47,7 +47,23 @@
       onSubmit(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$router.push("/home");
+            this.$axios
+            .post('api/signin', {
+              data: {
+                user: this.form.username,
+                pass: this.form.password
+              }
+            })
+            .then(function(response){
+                sessionStorage.setItem("token", response.data.token);       
+                this.$router.push("/query");
+                console.log(sessionStorage.getItem("token"))
+              } 
+                //        
+            )
+            .catch(function (error) {
+                console.log(error);
+            });
           } else {
             this.dialogVisible = true;
             return false;

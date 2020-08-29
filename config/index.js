@@ -11,12 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        "/baidu_music_api": {
-          target: "https://www.runoob.com/try/ajax/json_demo.json",
-          changeOrigin: true,
-          pathRewrite: {
-              '^/baidu_music_api': '/'
-          }
+      '/api': {
+        target: 'http://192.168.137.16:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
       }
     },
 
