@@ -13,7 +13,7 @@
       </el-form-item>
     </el-form>
 
-    <el-dialog title="温馨提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+    <el-dialog title="温馨提示" :visible.sync="dialogVisible" width="30%">
       <span>请输入账号和密码</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -23,71 +23,67 @@
 </template>
 
 <script>
-  export default {
-    name: "Login",
-    data() {
-      return {
-        form: {
-          username: '',
-          password: ''
-        },
-        rules: {
-          username: [
-            {required: true, message: '账号不可为空', trigger: 'blur'}
-          ],
-          password: [
-            {required: true, message: '密码不可为空', trigger: 'blur'}
-          ]
-        },
-        dialogVisible: false
-      }
+export default {
+  name: 'Login',
+  data () {
+    return {
+      form: {
+        username: '',
+        password: ''
+      },
+      rules: {
+        username: [
+          {required: true, message: '账号不可为空', trigger: 'blur'}
+        ],
+        password: [
+          {required: true, message: '密码不可为空', trigger: 'blur'}
+        ]
+      },
+      dialogVisible: false
+    }
 
-    },
-    methods: {
-      onSubmit(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.$axios
+  },
+  methods: {
+    onSubmit (formName) {
+      let that = this
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios
             .post('api/signin', {
-              data: {
-                user: this.form.username,
-                pass: this.form.password
-              }
+              user: this.form.username,
+              pass: this.form.password
             })
-            .then(function(response){
-                sessionStorage.setItem("token", response.data.token);       
-                this.$router.push("/query");
-                console.log(sessionStorage.getItem("token"))
-              } 
-                //        
+            .then(function (response) {
+              sessionStorage.setItem('token', response.data['token'])
+              that.$router.push('/query') }
             )
             .catch(function (error) {
-                console.log(error);
-            });
-          } else {
-            this.dialogVisible = true;
-            return false;
-          }
-        });
-      }
+              console.log(error)
+            })
+        } else {
+          this.dialogVisible = true
+          return false
+        }
+      })
     }
   }
+}
 </script>
 <style lang="scss" scoped>
-  .login-box {
-    border: 1px solid #DCDFE6;
-    width: 350px;
-    margin: 180px auto;
-    padding: 35px 35px 15px 35px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    box-shadow: 0 0 25px #909399;
-  }
+.login-box {
+  border: 1px solid #DCDFE6;
+  width: 350px;
+  margin: 180px auto;
+  padding: 35px 35px 15px 35px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 0 0 25px #909399;
+}
 
-  .login-title {
-    text-align: center;
-    margin: 0 auto 40px auto;
-    color: #303133;
-  }
+.login-title {
+  text-align: center;
+  margin: 0 auto 40px auto;
+  color: #303133;
+}
 </style>

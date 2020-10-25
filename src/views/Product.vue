@@ -1,33 +1,41 @@
 <template>
-  <el-row justify="center" align="middle">
-    <el-col :span="2"></el-col>
-    <el-col :span="20">
-      <div class="query-goods">
-        <el-input placeholder="搜索 酒名 / 品牌 / 品种" v-model="input" size="medium" class="my-input">
-          <!-- <el-button slot="append" icon="el-icon-search" v-on:click="query" autofocus>搜索</el-button> -->
-        </el-input>
-        <el-button size="medium" plain autofocus v-on:click="query">搜索</el-button>
-        <el-table :data="tableData" stripe style="width: 100%" :default-sort="{prop: 'brand', order: 'descending'}">
-          <el-table-column prop="name" label="酒名" sortable></el-table-column>
-          <el-table-column prop="brand" label="品牌" sortable></el-table-column>
-          <el-table-column prop="vol" label="容量" sortable></el-table-column>
-          <el-table-column prop="in_stock" label="库存" sortable></el-table-column>
-          <el-table-column label="历史价格">
-            <div><el-link href="/product/detail">查看<i class="el-icon-view el-icon--right"></i></el-link></div>
-          </el-table-column>
+  <div>
+    <el-row align="middle" class="overview-row">
+      <el-col :span="2"></el-col>
+      <el-col :span="6" class="overview-image">
+        <div class="wine-image">
+          <div class="block">
+            <el-image :src="url" style="height: 400px" fit="contain">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="14" class="overview-info">
+        <div>法国卡尔诺（中级庄）城堡干红葡萄酒750ml</div>
+        <div>中级庄品质，法国原瓶进口</div>
+        <el-table :data="tableData" stripe width="300em" style="width: 100%" :default-sort="{prop: 'hkd', order: 'descending'}">
+          <el-table-column prop="hkd" label="港币/HK$" width="100em" sortable></el-table-column>
+          <el-table-column prop="usd" label="美元/$" width="100em" sortable></el-table-column>
+          <el-table-column prop="eur" label="欧元/€" width="100em" sortable></el-table-column>
         </el-table>
-      </div>
-    </el-col>
-    <el-col :span="2"></el-col>
-  </el-row>
+      </el-col>
+      <el-col :span="2"></el-col>
+    </el-row>
+    <el-row>
+      <div></div>
+    </el-row>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Query',
+  name: 'Product',
   data () {
     return {
-      input: '',
+      url: require('../assets/wine1.jpg'),
       tableData: []
     }
   },
@@ -37,7 +45,7 @@ export default {
   methods: {
     getWines () {
       this.$axios
-        .get('/api/david/wines', {
+        .get('/api/david/price/1', {
           headers: {'token': sessionStorage.getItem('token')}}
         )
         .then(
@@ -79,22 +87,15 @@ export default {
 </script>
 
 <style scoped>
-.el-input {
-  width: 40%;
+.overview-row {
   margin-top: 3%;
-  border: 3px solid #FF0036;
 }
-
-.el-button {
-  color: white;
-  font-weight: bold;
-  border: 3px solid #FF0036;
-  background-color: #FF0036;
-  height: 3em;
+.overview-image {
+  border: 1px solid #f2f2f2;
 }
-
-.el-table {
-  margin-top: 3%;
+.overview-info {
+  border: 1px solid #f2f2f2;
+  text-align: start;
 }
 
 .el-col {
