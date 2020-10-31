@@ -29,7 +29,7 @@
           <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
           <el-menu-item index="2"><a href="/">首页</a></el-menu-item>
           <el-menu-item index="3" style="margin-left:60%"><a href="/login">登入</a></el-menu-item>
-          <el-menu-item index="4"><a href="https://www.ele.me">注册</a></el-menu-item>
+<!--          <el-menu-item index="4"><a href="https://www.ele.me">注册</a></el-menu-item>-->
         </el-menu>
       </el-main>
     </el-container>

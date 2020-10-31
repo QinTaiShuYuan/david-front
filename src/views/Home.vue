@@ -6,14 +6,14 @@
         <el-input placeholder="搜索 酒名 / 品牌 / 品种" v-model="input" size="medium" class="my-input">
           <!-- <el-button slot="append" icon="el-icon-search" v-on:click="query" autofocus>搜索</el-button> -->
         </el-input>
-        <el-button size="medium" plain autofocus v-on:click="query">搜索</el-button>
+        <el-button size="medium" type="primary" icon="el-icon-search" v-on:click="query" autofocus>搜索</el-button>
         <el-table :data="tableData" stripe style="width: 100%" :default-sort="{prop: 'brand', order: 'descending'}">
           <el-table-column prop="name" label="酒名" sortable></el-table-column>
           <el-table-column prop="brand" label="品牌" sortable></el-table-column>
           <el-table-column prop="vol" label="容量" sortable></el-table-column>
           <el-table-column prop="in_stock" label="库存" sortable></el-table-column>
-          <el-table-column label="历史价格">
-            <div><el-link href="/product/detail">查看<i class="el-icon-view el-icon--right"></i></el-link></div>
+          <el-table-column prop="id" label="历史价格">
+            <div><el-link v-on:click="checkPrice($props)">查看<i class="el-icon-view el-icon&#45;&#45;right"></i></el-link></div>
           </el-table-column>
         </el-table>
       </div>
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'Query',
+  name: 'HomePage',
   data () {
     return {
       input: '',
@@ -73,6 +73,16 @@ export default {
             console.log(error)
           })
       }
+    },
+    checkPrice (index) {
+      console.log(index)
+      // this.$router.push({
+      //   path: '/price',
+      //   name: 'Price',
+      //   params: {
+      //     id: this.tableData[index]['id']
+      //   }
+      // })
     }
   }
 }
@@ -82,15 +92,11 @@ export default {
 .el-input {
   width: 40%;
   margin-top: 3%;
-  border: 3px solid #FF0036;
 }
 
 .el-button {
   color: white;
   font-weight: bold;
-  border: 3px solid #FF0036;
-  background-color: #FF0036;
-  height: 3em;
 }
 
 .el-table {
@@ -104,6 +110,10 @@ export default {
 </style>
 <style>
 .my-input .el-input__inner {
+  border-radius: 0px;
+}
+
+.el-button {
   border-radius: 0px;
 }
 </style>

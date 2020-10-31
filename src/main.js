@@ -19,7 +19,20 @@ Vue.prototype.$axios = axios
 //   port: 8080,
 // };
 
-/* eslint-disable no-new */
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (sessionStorage.getItem('token')) {
+      console.log(sessionStorage.getItem('token'))
+      next()
+    } else {
+      next({path: '/login'})
+    }
+  } else {
+    next()
+  }
+})
+
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   router,

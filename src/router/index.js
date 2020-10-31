@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
-import Query from '@/views/Query'
-import Product from '../views/Product'
+import HomePage from '@/views/Home'
+import Price from '@/views/Price'
 
 Vue.use(Router)
 
@@ -11,9 +11,12 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/query',
-      name: 'Query',
-      component: Query
+      path: '/',
+      name: 'HomePage',
+      meta: {
+        requireAuth: true
+      },
+      component: HomePage
     },
     {
       path: '/login',
@@ -21,9 +24,12 @@ export default new Router({
       component: Login
     },
     {
-      path: '/product',
-      name: 'Product',
-      component: Product
+      path: '/price',
+      name: 'Price',
+      meta: {
+        requireAuth: true
+      },
+      component: Price
     }
   ]
 })

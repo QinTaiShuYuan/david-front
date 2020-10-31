@@ -41,7 +41,6 @@ export default {
       },
       dialogVisible: false
     }
-
   },
   methods: {
     onSubmit (formName) {
@@ -55,7 +54,7 @@ export default {
             })
             .then(function (response) {
               sessionStorage.setItem('token', response.data['token'])
-              that.$router.push('/query') }
+              that.$router.push('/') }
             )
             .catch(function (error) {
               console.log(error)
