@@ -13,7 +13,9 @@
           <el-table-column prop="vol" label="容量" sortable></el-table-column>
           <el-table-column prop="in_stock" label="库存" sortable></el-table-column>
           <el-table-column prop="id" label="历史价格">
-            <div><el-link v-on:click="checkPrice($props)">查看<i class="el-icon-view el-icon&#45;&#45;right"></i></el-link></div>
+            <template slot-scope="scope">
+              <div><el-link v-on:click="checkPrice(scope.$index)">查看<i class="el-icon-view el-icon&#45;&#45;right"></i></el-link></div>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -75,14 +77,13 @@ export default {
       }
     },
     checkPrice (index) {
-      console.log(index)
-      // this.$router.push({
-      //   path: '/price',
-      //   name: 'Price',
-      //   params: {
-      //     id: this.tableData[index]['id']
-      //   }
-      // })
+      this.$router.push({
+        path: '/price',
+        name: 'Price',
+        params: {
+          id: this.tableData[index]['id']
+        }
+      })
     }
   }
 }
