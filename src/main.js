@@ -22,7 +22,6 @@ Vue.prototype.$axios = axios
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     if (sessionStorage.getItem('token')) {
-      console.log(sessionStorage.getItem('token'))
       next()
     } else {
       next({path: '/login'})
